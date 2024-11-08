@@ -5,7 +5,7 @@ const nativejs = {
     },
 
     permission(permissionType, callback) {
-        browser.runtime.sendMessage({
+        browser.runtime.sendNativeMessage("nativejs", {
             type: "requestPermission",
             permission: permissionType
         }).then(response => {
