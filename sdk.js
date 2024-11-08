@@ -1,19 +1,17 @@
 const nativejs = {
     permissions: {
-        CAMERA: 'CAMERA',
-        LOCATION: 'LOCATION',
-      // other permissions are coming soon
+        CAMERA: "CAMERA",
+        LOCATION: "LOCATION"
     },
 
     permission(permissionType, callback) {
-        // Requests the permission using the Native Code
-        browser.runtime.sendMessage("nativeJs", {
-            name: "requestPermission",
-            data: permissionType
+        browser.runtime.sendMessage({
+            type: "requestPermission",
+            permission: permissionType
         }).then(response => {
             callback(response === "GRANTED");
         }).catch(error => {
-            console.error("[NATIVE-JS] Permission request error:", error);
+            console.error("[NATIVE-JS] Error requesting permission:", error);
             callback(false);
         });
     }
